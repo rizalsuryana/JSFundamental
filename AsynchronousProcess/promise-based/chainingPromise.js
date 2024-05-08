@@ -1,0 +1,53 @@
+const withDrawMoney = (amount) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (amount > 100) {
+                reject(new Error('Teu cekap a acisna kanggo withDraw'));
+            }
+
+            resolve(amount);
+        }, 1000);
+    });
+}
+
+const buyCinemaTicket = (money) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(()=> {
+            if (money < 10) {
+                reject(new Error(`Acisna teu cekap kanggo meser ticket`));
+            }
+            resolve('ticket-1');
+        }, 1000);
+    });
+}
+
+
+const goInsideCinema = (ticket) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if(!ticket) {
+                reject(new Error(`Teu ngagaduhan ticket hayang asup?`));
+            }
+            resolve(`Wilujeung nonton film ! :)`);
+        }, 1000);
+    });
+}
+
+
+const watchMovie = () => {
+    withDrawMoney(10)
+    .then((money) => {
+        return buyCinemaTicket(money);
+    })
+    .then((ticket) => {
+        return goInsideCinema(ticket);
+    })
+    .then((result)=> {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error.message);
+    });
+}
+
+watchMovie();
